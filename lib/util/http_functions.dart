@@ -41,7 +41,7 @@ class Http {
     try {
       // String accessToken = await LocalSave.get(key: "accessToken") ?? "";
       _beforeCall(apiRoute, null);
-      var response = await http.get(Uri.parse(apiRoute));
+      var response = await http.get(Uri.parse(apiRoute), headers: {"Access-Control-Allow-Origin": "*", 'Content-Type': 'application/json', 'Accept': '*/*'});
       dynamic result = jsonDecode(response.body);
       _gotResult(result);
       if (response.statusCode == 200) {
