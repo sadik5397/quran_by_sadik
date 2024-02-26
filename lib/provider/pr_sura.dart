@@ -58,7 +58,11 @@ class ProviderSurah with ChangeNotifier {
       isPlaying[index] = false;
       player.pause();
     } else if (lastIndex == selectedIndex) {
-      player.resume();
+      isLoading[index] = true;
+      refresh();
+      await player.resume();
+      isPlaying[index] = true;
+      isLoading[index] = false;
     } else {
       String fileNumber = index < 9
           ? "00${index + 1}"
