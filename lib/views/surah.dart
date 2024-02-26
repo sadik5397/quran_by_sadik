@@ -39,7 +39,7 @@ class AllSurah extends StatelessWidget {
                         width: double.maxFinite,
                         color: Colors.white,
                         padding: const EdgeInsets.all(12),
-                        child: Text('${capitalizeAllWord("${cleanedString(p.surahList[p.selectedIndex!]["name"])}\n Qari: ${p.selectedQari}")}\n Developed by: S.a. Sadik: sadik.work/apps',
+                        child: Text('${capitalizeAllWord("${cleanedString(p.surahList[p.selectedIndex!]["name"])}\n Qari: ${p.selectedQari}")}\n Developed by : S.a. Sadik: sadik.work/apps',
                             textAlign: TextAlign.center)),
                   Container(
                     color: Colors.white,
