@@ -24,6 +24,7 @@ class ProviderSurah with ChangeNotifier {
   String selectedQariPath = "";
 
   initialize() async {
+    // await test();
     await getSurahList();
     player.onDurationChanged.listen((newDuration) {
       currentSuraDuration = newDuration;
@@ -43,6 +44,10 @@ class ProviderSurah with ChangeNotifier {
       }
       refresh();
     });
+  }
+
+  Future<void> test() async {
+    await Http.get("https://api.alquran.cloud");
   }
 
   void togglePlayPause(int index) async {
