@@ -5,6 +5,7 @@ import '../provider/pr_sura.dart';
 
 class AnimatedPlayPauseIcon extends StatefulWidget {
   const AnimatedPlayPauseIcon({super.key, required this.index});
+
   final int index;
 
   @override
@@ -17,27 +18,15 @@ class AnimatedPlayPauseIconState extends State<AnimatedPlayPauseIcon> with Singl
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      vsync: this, // Provide `this` as the TickerProvider
-      duration: const Duration(milliseconds: 500),
-    );
+    _animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
   }
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ProviderSurah>(context);
-    final animation = CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    );
-
-    if (provider.isPlaying[widget.index]) {
-      _animationController.forward();
-    } else {
-      _animationController.reverse();
-    }
-
-    return AnimatedIcon(icon: AnimatedIcons.play_pause, progress: animation);
+    final animation = CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
+    provider.isPlaying[widget.index] ? _animationController.forward() : _animationController.reverse();
+    return provider.isLoading[widget.index] ? const CircularProgressIndicator() : AnimatedIcon(icon: AnimatedIcons.play_pause, progress: animation);
   }
 
   @override

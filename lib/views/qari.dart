@@ -17,13 +17,23 @@ class AllQari extends StatelessWidget {
         body: Consumer<ProviderQari>(builder: (context, p, child) {
           return p.qariList.isEmpty
               ? NoData.loading()
-              : ListView.builder(
-                  itemCount: p.qariList.length,
-                  itemBuilder: (context, index) => ListTile(
-                      leading: CircleAvatar(child: Text(p.qariList[index]["id"].toString())),
-                      title: Text(p.qariList[index]["name"].toString()),
-                      subtitle: Text(p.qariList[index]["arabic_name"] ?? p.qariList[index]["description"].toString().split(",").first),
-                      onTap: () {}));
+              : Column(
+                  children: [
+                    Container(alignment: Alignment.center, width: double.maxFinite, color: Colors.white, padding: const EdgeInsets.all(12), child: const Text("Long tap to set as default Qari")),
+                    Expanded(
+                      child: ListView.builder(
+                          itemCount: p.qariList.length,
+                          itemBuilder: (context, index) => ListTile(
+                              selected: p.qariList[index]["relative_path"] == p.selectedQariPath,
+                              selectedTileColor: Colors.deepPurple.shade50,
+                              trailing: p.qariList[index]["relative_path"] == p.selectedQariPath ? const CircleAvatar(child: Icon(Icons.done_rounded)) : null,
+                              leading: CircleAvatar(child: Text(p.qariList[index]["id"].toString())),
+                              title: Text(p.qariList[index]["name"].toString()),
+                              subtitle: Text(p.qariList[index]["arabic_name"] ?? p.qariList[index]["description"].toString().split(",").first),
+                              onLongPress: () => p.changeQari(p.qariList[index]))),
+                    ),
+                  ],
+                );
         }));
   }
 }
