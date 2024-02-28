@@ -46,10 +46,6 @@ class ProviderSurah with ChangeNotifier {
     });
   }
 
-  Future<void> test() async {
-    await Http.get("https://api.alquran.cloud");
-  }
-
   void togglePlayPause(int index) async {
     selectedIndex = index;
     // Pause the playing one
